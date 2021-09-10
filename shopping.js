@@ -4,6 +4,7 @@ const inputAdd = document.querySelector(".shopping-inputAdd");
 const btnAdd = document.querySelector(".shopping-btnAdd");
 const btnAddIcon = btnAdd.querySelector("i");
 const ul = document.querySelector("ul");
+const form = document.querySelector("form");
 
 btnAdd.addEventListener("click", () => {
   const check = inputAdd.classList.contains("clickAdd");
@@ -16,26 +17,24 @@ btnAdd.addEventListener("click", () => {
   }
 });
 
-inputAdd.addEventListener("keypress", (event) => {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    const userInput = event.target.value;
-    if (userInput === "") {
-      return;
-    }
-    event.target.value = "";
-    const li = document.createElement("li");
-    li.setAttribute("class", "shipping-list");
-    li.innerHTML = `
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const userInput = inputAdd.value;
+  if (userInput === "") {
+    return;
+  }
+  inputAdd.value = "";
+  const li = document.createElement("li");
+  li.setAttribute("class", "shipping-list");
+  li.innerHTML = `
     <span>${userInput}</span>
     <div>
         <button class="list-check" onclick="handleClickCheck(this)"><i class="fas fa-check"></i></button>
         <button class="list-delete" onclick="handleClickDelete(this)"><i class="fas fa-trash"></i></button>
     </div>
   `;
-    ul.appendChild(li);
-    li.scrollIntoView({ block: "center" });
-  }
+  ul.appendChild(li);
+  li.scrollIntoView({ block: "center" });
 });
 
 const handleClickCheck = (targetInfo) => {
@@ -48,5 +47,5 @@ const handleClickCheck = (targetInfo) => {
 
 const handleClickDelete = (targetInfo) => {
   const target = targetInfo.parentNode.parentNode;
-  ul.removeChild(target);
+  target.remove();
 };
