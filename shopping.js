@@ -20,6 +20,9 @@ inputAdd.addEventListener("keypress", (event) => {
   if (event.keyCode === 13) {
     event.preventDefault();
     const userInput = event.target.value;
+    if (userInput === "") {
+      return;
+    }
     event.target.value = "";
     const li = document.createElement("li");
     li.setAttribute("class", "shipping-list");
