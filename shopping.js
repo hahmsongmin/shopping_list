@@ -34,6 +34,7 @@ inputAdd.addEventListener("keypress", (event) => {
     </div>
   `;
     ul.appendChild(li);
+    li.scrollIntoView({ block: "center" });
   }
 });
 
